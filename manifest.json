@@ -1,0 +1,21 @@
+{
+  "name": "Gates of Olympus 1000 Risk Calculator",
+  "short_name": "GO 1000 Calc",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#3c0073",
+  "theme_color": "#3c0073",
+  "description": "A stylish, installable risk calculator for Gates of Olympus 1000.",
+  "icons": [
+    {
+      "src": "https://cdn.slotscalendar.com/wp-content/uploads/2023/10/gates-of-olympus-1000-slot-logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://cdn.slotscalendar.com/wp-content/uploads/2023/10/gates-of-olympus-1000-slot-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
