@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gates of Olympus 1000 - Risk Calculator</title>
+  <link rel="icon" type="image/png" href="https://cdn.slotscalendar.com/wp-content/uploads/2023/10/gates-of-olympus-1000-slot-logo.png" />
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#3c0073">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #3c0073, #1c0731);
+      color: #f0e6ff;
+      padding: 30px;
+      text-align: center;
+      margin: 0;
+    }
+
+    h1 {
+      color: #ffe100;
+      font-size: 2.3em;
+      margin-bottom: 10px;
+    }
+
+    .logo {
+      width: 250px;
+      margin-bottom: 20px;
+    }
+
+    .username-box {
+      margin: 35px auto 30px;
+      padding: 30px 15px;
+      background: rgba(0,0,0,0.15);
+      border-radius: 10px;
+      max-width: 350px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.10);
+    }
+
+    .username-box label {
+      color: #ffd700;
+      font-weight: bold;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .username-box input {
+      font-size: 1.1em;
+      padding: 8px 12px;
+      border-radius: 5px;
+      border: none;
+      margin-bottom: 10px;
+      width: 80%;
+      text-align: center;
+    }
+    .username-box button {
+      padding: 8px 32px;
+      background: #a02cff;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .username-box button:hover {
+      background: #8a24d9;
+    }
+
+    .user-greeting {
+      font-size: 1.1em;
+      color: #ffd700;
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #ffd700;
+    }
+
+    input[type="number"] {
+      padding: 10px;
+      width: 200px;
+      border-radius: 5px;
+      border: none;
+      font-size: 1em;
+      margin: 5px auto 15px;
+      display: block;
+    }
+
+    button.calc, button.share, button.clear-history {
+      margin-top: 25px;
+      padding: 12px 30px;
+      background-color: #a02cff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-right: 10px;
+    }
+    button.share {
+      background-color: #25d366;
+    }
+    button.share:hover {
+      background-color: #1da851;
+    }
+    button.clear-history {
+      background-color: #ff4444;
+    }
+    button.clear-history:hover {
+      background-color: #c83737;
+    }
+    button.calc:hover {
+      background-color: #8a24d9;
+    }
+
+    .result {
+      margin-top: 30px;
+      padding: 25px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      text-align: left;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #ffffff;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+
+    .risk-low { color: #00ff99; font-weight: bold; }
+    .risk-medium { color: #ffcc00; font-weight: bold; }
+    .risk-high { color: #ff4444; font-weight: bold; }
+
+    .history {
+      margin-top: 50px;
+      background: rgba(0,0,0,0.12);
+      border-radius: 10px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #fff;
+      padding: 18px 14px 12px 14px;
+      text-align: left;
+      box-shadow: 0 0 10px rgba(0,0,0,0.07);
+    }
+    .history h3 {
+      color: #ffe100;
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+    .history-list {
+      margin: 0 0 12px 0;
+      padding: 0;
+      list-style: none;
+      font-size: .97em;
+    }
+    .history-list li {
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 8px 0;
+      margin-bottom: 4px;
+    }
+    .history-list li:last-child {
+      border-bottom: none;
+    }
+    .timestamp {
+      color: #ccc;
+      font-size: .85em;
+      margin-left: 12px;
+    }
+
+    @media (max-width: 600px) {
+      input[type="number"], button.calc, button.share, button.clear-history {
+        width: 95%;
+      }
+      .result, .history {
+        width: 95%;
+        font-size: 0.95em;
+      }
+      .logo {
+        width: 90vw;
+        max-width: 280px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <img class="logo" src="https://cdn.slotscalendar.com/wp-content/uploads/2023/10/gates-of-olympus-1000-slot-logo.png" alt="Gates of Olympus 1000 Logo" />
+
+  <h1>Gates of Olympus 1000 💥 Risk Calculator</h1>
+  
+  <div id="usernameModal" class="username-box" style="display:none;">
+    <label for="username">👤 Enter your username to use the calculator:</label>
+    <input type="text" id="username" maxlength="24" autocomplete="off" autofocus required />
+    <button onclick="saveUsername()">Start</button>
+  </div>
+  <div id="greeting" class="user-greeting" style="display:none;"></div>
+
+  <div id="calculator" style="display:none;">
+    <label for="bet">💰 Bet Size (R):</label>
+    <input type="number" id="bet" step="0.01" />
+
+    <label for="spins">🎰 Total Spins:</label>
+    <input type="number" id="spins" />
+
+    <label for="freespins">💫 Free Spins Triggered:</label>
+    <input type="number" id="freespins" />
+
+    <label for="return">📈 Total Return (R):</label>
+    <input type="number" id="return" step="0.01" />
+
+    <button class="calc" onclick="calculate()">Calculate</button>
+    <button class="share" onclick="shareResult()" style="display:none;">Share Result</button>
+    <div class="result" id="results"></div>
+  </div>
+
+  <div id="history" class="history" style="display:none;">
+    <h3>Session History</h3>
+    <ul class="history-list" id="history-list"></ul>
+    <button class="clear-history" onclick="clearHistory()">Clear History</button>
+  </div>
+
+  <script>
+    // --- PWA Service Worker Registration ---
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("sw.js");
+      });
+    }
+
+    // --- Username Handling ---
+    let username = localStorage.getItem("go_username");
+    function showUsernameModal() {
+      document.getElementById('usernameModal').style.display = 'block';
+      document.getElementById('calculator').style.display = 'none';
+      document.getElementById('greeting').style.display = 'none';
+      document.getElementById('history').style.display = 'none';
+    }
+    function saveUsername() {
+      const input = document.getElementById('username').value.trim();
+      if (input.length === 0) {
+        alert("Please enter a username!");
+        return;
+      }
+      username = input;
+      localStorage.setItem("go_username", username);
+      updateGreeting();
+      document.getElementById('usernameModal').style.display = 'none';
+      document.getElementById('calculator').style.display = 'block';
+      document.getElementById('history').style.display = 'block';
+      showHistory();
+    }
+    function updateGreeting() {
+      document.getElementById('greeting').style.display = 'block';
+      document.getElementById('greeting').innerHTML = `Welcome, <strong>${username}</strong>!`;
+    }
+
+    // --- Calculator ---
+    function calculate() {
+      const bet = parseFloat(document.getElementById('bet').value);
+      const spins = parseInt(document.getElementById('spins').value);
+      const freeSpins = parseInt(document.getElementById('freespins').value);
+      const totalReturn = parseFloat(document.getElementById('return').value);
+
+      if (isNaN(bet) || isNaN(spins) || isNaN(freeSpins) || isNaN(totalReturn)) {
+        document.getElementById('results').innerHTML = "<p>Please fill in all fields correctly.</p>";
+        document.querySelector(".share").style.display = "none";
+        return;
+      }
+
+      const totalWagered = bet * spins;
+      const netProfit = totalReturn - totalWagered;
+      const roi = (netProfit / totalWagered) * 100;
+
+      let riskLevel = '';
+      if (roi > 20) {
+        riskLevel = `<span class='risk-low'>Low Risk (Great session ✅)</span>`;
+      } else if (roi >= -20 && roi <= 20) {
+        riskLevel = `<span class='risk-medium'>Medium Risk (Break-even zone ⚠️)</span>`;
+      } else {
+        riskLevel = `<span class='risk-high'>High Risk (Tough session ❌)</span>`;
+      }
+
+      const freeSpinFreq = ((freeSpins / spins) * 100).toFixed(2);
+
+      const resultHTML = `
+        <h2>📊 Results for <em>${username}</em></h2>
+        <p><strong>Total Wagered:</strong> R${totalWagered.toFixed(2)}</p>
+        <p><strong>Total Return:</strong> R${totalReturn.toFixed(2)}</p>
+        <p><strong>Net Profit/Loss:</strong> R${netProfit.toFixed(2)}</p>
+        <p><strong>ROI:</strong> ${roi.toFixed(2)}%</p>
+        <p><strong>Risk Level:</strong> ${riskLevel}</p>
+        <p><strong>Free Spins Hit:</strong> ${freeSpins} (${freeSpinFreq}% frequency)</p>
+      `;
+      document.getElementById('results').innerHTML = resultHTML;
+      document.querySelector(".share").style.display = "inline-block";
+
+      // Save to history
+      saveToHistory({
+        username,
+        bet: bet.toFixed(2),
+        spins,
+        freeSpins,
+        totalReturn: totalReturn.toFixed(2),
+        totalWagered: totalWagered.toFixed(2),
+        netProfit: netProfit.toFixed(2),
+        roi: roi.toFixed(2),
+        freeSpinFreq,
+        time: new Date().toLocaleString()
+      });
+      showHistory();
+    }
+
+    // --- Session History (localStorage) ---
+    function saveToHistory(entry) {
+      let history = JSON.parse(localStorage.getItem('go_history_' + username)) || [];
+      history.unshift(entry);
+      if (history.length > 15) history = history.slice(0, 15); // Keep only last 15
+      localStorage.setItem('go_history_' + username, JSON.stringify(history));
+    }
+    function showHistory() {
+      if (!username) return;
+      let history = JSON.parse(localStorage.getItem('go_history_' + username)) || [];
+      const list = document.getElementById('history-list');
+      list.innerHTML = '';
+      if (history.length === 0) {
+        list.innerHTML = '<li>No history yet. Calculate to save your first session!</li>';
+        return;
+      }
+      history.forEach((item, i) => {
+        list.innerHTML += `<li>
+          <strong>[${item.time}]</strong>
+          <br>Bet: R${item.bet}, Spins: ${item.spins}, Free Spins: ${item.freeSpins}
+          <br>Return: R${item.totalReturn}, ROI: ${item.roi}%, Risk: 
+          <span class="${item.roi > 20 ? 'risk-low' : (item.roi >= -20 ? 'risk-medium' : 'risk-high')}">
+            ${item.roi > 20 ? 'Low' : (item.roi >= -20 ? 'Medium' : 'High')}
+          </span>
+        </li>`;
+      });
+    }
+    function clearHistory() {
+      if (confirm("Are you sure you want to clear your history?")) {
+        localStorage.removeItem('go_history_' + username);
+        showHistory();
+      }
+    }
+
+    // --- Share Result (Web Share API) ---
+    function shareResult() {
+      const resultBox = document.getElementById('results');
+      if (!resultBox.innerText) return;
+      const text = "Gates of Olympus 1000 - Risk Calc\n\n" + resultBox.innerText.replace(/\n+/g, '\n');
+      if (navigator.share) {
+        navigator.share({
+          title: 'Gates of Olympus 1000 Risk Calculator',
+          text
+        });
+      } else {
+        // Fallback: copy to clipboard
+        navigator.clipboard.writeText(text).then(() => {
+          alert("Result copied to clipboard! You can now paste and share it anywhere.");
+        });
+      }
+    }
+
+    // --- Startup: Require Username ---
+    window.onload = function() {
+      if (!username) {
+        showUsernameModal();
+      } else {
+        document.getElementById('usernameModal').style.display = 'none';
+        document.getElementById('calculator').style.display = 'block';
+        document.getElementById('history').style.display = 'block';
+        updateGreeting();
+        showHistory();
+      }
+    }
+  </script>
+</body>
+</html>
